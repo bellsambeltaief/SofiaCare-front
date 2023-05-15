@@ -1,53 +1,24 @@
-import 'package:sofiacare/patient/screens/home_screen.dart';
-import 'package:sofiacare/welcome_animation/sign/login.dart';
-import 'package:sofiacare/services/user_service.dart';
+
 import 'package:sofiacare/constant.dart';
+import 'package:sofiacare/reser_pas/mdp_oubli%C3%A9.dart';
+import 'package:sofiacare/sign/register.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../model/api_response.dart';
-import '../../model/user.dart';
 
-class Register extends StatefulWidget {
-  const Register({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<Login> createState() => _LoginState();
 }
 
-class _RegisterState extends State<Register> {
+class _LoginState extends State<Login> {
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  // ignore: non_constant_identifier_names
-  TextEditingController EmailCntrl = TextEditingController(),
-      // ignore: non_constant_identifier_names
-      NomController = TextEditingController(),
-      // ignore: non_constant_identifier_names
-      PasswordController = TextEditingController(),
-      // ignore: non_constant_identifier_names
-      ConfirmPassword = TextEditingController();
-
+  TextEditingController txtEmail = TextEditingController();
+  TextEditingController txtPassword = TextEditingController();
   bool loading = false;
-  void _registerUser() async {
-    ApiResponse response = await register(
-        NomController.text, EmailCntrl.text, PasswordController.text);
-    if (response.error == null) {
-      _saveAndRedirectToHome(response.data as User);
-    } else {
-      setState(() {
-        loading = false;
-      });
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('${response.error}')));
-    }
-  }
 
-  void _saveAndRedirectToHome(User user) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    await pref.setString('token', user.token ?? '');
-    await pref.setInt('userId', user.id ?? 0);
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -64,22 +35,7 @@ class _RegisterState extends State<Register> {
             children: [
               TextFormField(
                 keyboardType: TextInputType.emailAddress,
-                controller: NomController,
-                validator: (val) => val!.isEmpty ? 'Invalid username' : null,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.person),
-                    labelText: 'UserName',
-                    contentPadding: EdgeInsets.all(10),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(width: 1, color: Colors.black))),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                controller: EmailCntrl,
+                controller: txtEmail,
                 validator: (val) =>
                     val!.isEmpty ? 'Invalid email adress' : null,
                 decoration: InputDecoration(
@@ -88,15 +44,16 @@ class _RegisterState extends State<Register> {
                     contentPadding: EdgeInsets.all(10),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(width: 1, color: Colors.black))),
+                        borderSide: BorderSide(width: 1, color: Colors.green))),
               ),
               SizedBox(
                 height: 10,
               ),
               TextFormField(
                 obscureText: true,
-                controller: PasswordController,
-                validator: (val) => val!.isEmpty ? 'Minimum 6 caractére' : null,
+                controller: txtPassword,
+                validator: (val) =>
+                    val!.length < 6 ? 'Minimum 6 caractére' : null,
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock_outline),
                     labelText: 'Password',
@@ -106,21 +63,23 @@ class _RegisterState extends State<Register> {
                         borderSide: BorderSide(width: 1, color: Colors.black))),
               ),
               SizedBox(
-                height: 10,
+                height: 5,
               ),
-              TextFormField(
-                obscureText: true,
-                controller: ConfirmPassword,
-                validator: (val) => val != PasswordController.text
-                    ? 'Confirm password does not match'
-                    : null,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock_outline),
-                    labelText: 'Confirm Password',
-                    contentPadding: EdgeInsets.all(10),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(width: 1, color: Colors.black))),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MdpOublie()),
+                      );
+                    },
+                    child: Text(
+                      'Mot de passe oublié',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 101, 36, 207),
+                      ),
+                    )),
               ),
               SizedBox(
                 height: 15,
@@ -133,8 +92,8 @@ class _RegisterState extends State<Register> {
                       onPressed: () {
                         if (formkey.currentState!.validate()) {
                           setState(() {
-                            loading = !loading;
-                            _registerUser();
+                            //loading = true;
+                           // _loginUser();
                           });
                         }
                       },
@@ -144,7 +103,8 @@ class _RegisterState extends State<Register> {
                       ),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateColor.resolveWith(
-                            (states) => Color.fromARGB(255, 101, 36, 207)),
+                          (states) => Color.fromARGB(255, 101, 36, 207),
+                        ),
                         padding: MaterialStateProperty.resolveWith(
                           (states) => EdgeInsets.symmetric(vertical: 10),
                         ),
@@ -153,10 +113,10 @@ class _RegisterState extends State<Register> {
               SizedBox(
                 height: 10,
               ),
-              kLoginRegisterHint("Déja a un compte?", 'Connexion', () {
+              kLoginRegisterHint("je n'ai pas un compte?", 'Inscription', () {
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => Login()),
-                    (route) => false);
+                    MaterialPageRoute(builder: (context) => Register()),
+                    (route) => true);
               }),
               SizedBox(
                 height: 100,

@@ -1,41 +1,52 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sofiacare/start.dart';
+import 'package:sofiacare/sign/login.dart';
+import 'package:sofiacare/services/user_service.dart';
 import 'package:sofiacare/constant.dart';
-// ignore: unused_import
-import 'package:sofiacare/patient/screens/home_screen.dart';
-import 'package:sofiacare/welcome_animation/sign/reser_pas/mdp_oubli%C3%A9.dart';
-import 'package:sofiacare/welcome_animation/sign/register.dart';
-
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// ignore: unused_import
-import '../../model/api_response.dart';
-import '../../model/user.dart';
-// ignore: unused_import
-import '../../services/user_service.dart';
-//import 'package:flutter/widgets.dart';
-class Login extends StatefulWidget {
-  const Login({super.key});
+import '../model/api_response.dart';
+import '../model/user.dart';
+
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  TextEditingController txtEmail = TextEditingController();
-  TextEditingController txtPassword = TextEditingController();
+
+  TextEditingController emailCntrl = TextEditingController(),
+
+      nomController = TextEditingController(),
+
+      passwordController = TextEditingController(),
+ 
+      confirmPassword = TextEditingController();
+
   bool loading = false;
+  void _registerUser() async {
+    ApiResponse response = await register(
+        nomController.text, emailCntrl.text, passwordController.text);
+    if (response.error == null) {
+      _saveAndRedirectToHome(response.data as User);
+    } else {
+      setState(() {
+        loading = false;
+      });
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('${response.error}')));
+    }
+  }
 
-  
-
-
-  // ignore: unused_element
   void _saveAndRedirectToHome(User user) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.setString('token', user.token ?? '');
     await pref.setInt('userId', user.id ?? 0);
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
+        MaterialPageRoute(builder: (context) => Start()), (route) => false);
   }
 
   @override
@@ -53,7 +64,22 @@ class _LoginState extends State<Login> {
             children: [
               TextFormField(
                 keyboardType: TextInputType.emailAddress,
-                controller: txtEmail,
+                controller:  nomController,
+                validator: (val) => val!.isEmpty ? 'Invalid username' : null,
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.person),
+                    labelText: 'UserName',
+                    contentPadding: EdgeInsets.all(10),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(width: 1, color: Colors.black))),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                controller: emailCntrl,
                 validator: (val) =>
                     val!.isEmpty ? 'Invalid email adress' : null,
                 decoration: InputDecoration(
@@ -62,16 +88,15 @@ class _LoginState extends State<Login> {
                     contentPadding: EdgeInsets.all(10),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(width: 1, color: Colors.green))),
+                        borderSide: BorderSide(width: 1, color: Colors.black))),
               ),
               SizedBox(
                 height: 10,
               ),
               TextFormField(
                 obscureText: true,
-                controller: txtPassword,
-                validator: (val) =>
-                    val!.length < 6 ? 'Minimum 6 caractére' : null,
+                controller: passwordController,
+                validator: (val) => val!.isEmpty ? 'Minimum 6 caractére' : null,
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock_outline),
                     labelText: 'Password',
@@ -81,23 +106,21 @@ class _LoginState extends State<Login> {
                         borderSide: BorderSide(width: 1, color: Colors.black))),
               ),
               SizedBox(
-                height: 5,
+                height: 10,
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MdpOublie()),
-                      );
-                    },
-                    child: Text(
-                      'Mot de passe oublié',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 101, 36, 207),
-                      ),
-                    )),
+              TextFormField(
+                obscureText: true,
+                controller: confirmPassword,
+                validator: (val) => val != passwordController.text
+                    ? 'Confirm password does not match'
+                    : null,
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.lock_outline),
+                    labelText: 'Confirm Password',
+                    contentPadding: EdgeInsets.all(10),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(width: 1, color: Colors.black))),
               ),
               SizedBox(
                 height: 15,
@@ -110,8 +133,8 @@ class _LoginState extends State<Login> {
                       onPressed: () {
                         if (formkey.currentState!.validate()) {
                           setState(() {
-                            //loading = true;
-                           // _loginUser();
+                            loading = !loading;
+                            _registerUser();
                           });
                         }
                       },
@@ -121,8 +144,7 @@ class _LoginState extends State<Login> {
                       ),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateColor.resolveWith(
-                          (states) => Color.fromARGB(255, 101, 36, 207),
-                        ),
+                            (states) => Color.fromARGB(255, 101, 36, 207)),
                         padding: MaterialStateProperty.resolveWith(
                           (states) => EdgeInsets.symmetric(vertical: 10),
                         ),
@@ -131,10 +153,10 @@ class _LoginState extends State<Login> {
               SizedBox(
                 height: 10,
               ),
-              kLoginRegisterHint("je n'ai pas un compte?", 'Inscription', () {
+              kLoginRegisterHint("Déja a un compte?", 'Connexion', () {
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => Register()),
-                    (route) => true);
+                    MaterialPageRoute(builder: (context) => Login()),
+                    (route) => false);
               }),
               SizedBox(
                 height: 100,

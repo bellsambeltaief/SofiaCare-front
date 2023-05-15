@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sofiacare/patient/screens/rendez_vous/validate.dart';
 
-import '../../../widgets/buttons/app_bar.dart';
-import '../widgets/buttons/button_login.dart';
+import '../../../widgets/app_bar.dart';
+import '../../widgets/buttons/button_login.dart';
 
 class DateTimePicker extends StatefulWidget {
   const DateTimePicker({super.key});

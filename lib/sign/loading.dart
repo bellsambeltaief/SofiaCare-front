@@ -1,10 +1,9 @@
 import 'package:sofiacare/constant.dart';
-import 'package:sofiacare/patient/screens/home_screen.dart';
-import 'package:sofiacare/welcome_animation/sign/login.dart';
+import 'package:sofiacare/start.dart';
+import 'package:sofiacare/sign/login.dart';
 import 'package:sofiacare/model/api_response.dart';
 import 'package:flutter/material.dart';
-
-import '../../services/user_service.dart';
+import '../services/user_service.dart';
 
 class Loading extends StatefulWidget {
   const Loading({super.key});
@@ -23,7 +22,7 @@ class _LoadingState extends State<Loading> {
       ApiResponse response = await getUserDetail();
       if (response.error == null) {
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
+            MaterialPageRoute(builder: (context) => Start()), (route) => false);
       } else if (response.error == unauthorized) {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => Login()), (route) => false);

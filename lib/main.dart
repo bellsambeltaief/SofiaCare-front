@@ -1,13 +1,8 @@
-// ignore: unused_import
-import 'package:sofiacare/patient/screens/home_screen.dart';
-// ignore: unused_import
-import 'package:sofiacare/welcome_animation/components/welcome_view.dart';
-// ignore: unused_import
-import 'package:sofiacare/welcome_animation/introduction_animation_screen.dart';
+
+import 'package:sofiacare/start.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-//import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false, home: HomeScreen());
+        debugShowCheckedModeBanner: false, home: Start());
   }
 }
 
