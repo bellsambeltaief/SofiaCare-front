@@ -1,4 +1,4 @@
-import 'package:sofiacare/welcome_animation/introduction_animation_screen.dart';
+import 'package:sofiacare/views/welcome_animation/introduction_animation_screen.dart';
 import 'package:flutter/widgets.dart';
 
 class HomeList {

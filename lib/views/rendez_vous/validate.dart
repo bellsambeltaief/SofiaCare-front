@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sofiacare/widgets/app_bar.dart';
 
-import '../../../widgets/buttons/app_bar.dart';
+
 
 
 class Validate extends StatelessWidget {

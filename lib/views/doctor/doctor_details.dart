@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sofiacare/welcome_animation/components/custom_appbar.dart';
+import 'package:sofiacare/views/welcome_animation/components/custom_appbar.dart';
 
 class DoctorDetails extends StatefulWidget {
   const DoctorDetails({Key? key, required Map<String, dynamic> doctor, required bool isFav}) : super(key: key);

@@ -1,9 +1,9 @@
 // ignore: unused_import
-import 'package:sofiacare/patient/screens/home_screen.dart';
+import 'package:sofiacare/views/home/home_screen.dart';
 // ignore: unused_import
-import 'package:sofiacare/welcome_animation/components/welcome_view.dart';
+import 'package:sofiacare/views/welcome_animation/components/welcome_view.dart';
 // ignore: unused_import
-import 'package:sofiacare/welcome_animation/introduction_animation_screen.dart';
+import 'package:sofiacare/views/welcome_animation/introduction_animation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

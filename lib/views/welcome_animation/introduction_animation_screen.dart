@@ -1,10 +1,10 @@
-import 'package:sofiacare/welcome_animation/components/dossier_med.dart';
-import 'package:sofiacare/welcome_animation/components/welcome_page.dart';
-import 'package:sofiacare/welcome_animation/components/sante.dart';
-import 'package:sofiacare/welcome_animation/components/rendez_vous.dart';
-import 'package:sofiacare/welcome_animation/components/sofia.dart';
-import 'package:sofiacare/welcome_animation/components/top_back_skip_view.dart';
-import 'package:sofiacare/welcome_animation/components/welcome_view.dart';
+import 'package:sofiacare/views/welcome_animation/components/dossier_med.dart';
+import 'package:sofiacare/views/welcome_animation/components/welcome_page.dart';
+import 'package:sofiacare/views/welcome_animation/components/sante.dart';
+import 'package:sofiacare/views/welcome_animation/components/rendez_vous.dart';
+import 'package:sofiacare/views/welcome_animation/components/sofia.dart';
+import 'package:sofiacare/views/welcome_animation/components/top_back_skip_view.dart';
+import 'package:sofiacare/views/welcome_animation/components/welcome_view.dart';
 import 'package:flutter/material.dart';
 
 class IntroductionAnimationScreen extends StatefulWidget {

@@ -1,5 +1,3 @@
-// ignore: unused_import
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 const Color wColor = Colors.white;

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-// ignore: unnecessary_import
-import 'package:flutter/cupertino.dart';
-// ignore: duplicate_import
-import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:sofiacare/patient/screens/rendez_vous/date_time_picker.dart';
-import 'colors.dart';
+import 'package:sofiacare/views/rendez_vous/date_time_picker.dart';
+import '../../tools/colors.dart';
 
 class AppointScreen extends StatelessWidget {
   const AppointScreen({super.key});
@@ -241,53 +237,44 @@ class AppointScreen extends StatelessWidget {
                       color: Colors.black.withOpacity(0.6),
                     ),
                   ),
-                  
-                                SizedBox(height: 20),
-Material(
-  color: pColor,
-  borderRadius: BorderRadius.circular(10),
-  child: ElevatedButton(
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DateTimePicker(),
+                  SizedBox(height: 20),
+                  Material(
+                    color: pColor,
+                    borderRadius: BorderRadius.circular(10),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DateTimePicker(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        // ignore: deprecated_member_use
+                        foregroundColor: wColor, primary: pColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        minimumSize:
+                            Size(MediaQuery.of(context).size.width, 60),
+                      ),
+                      child: Text(
+                        "Prenez un Rendez-vous",
+                        style: TextStyle(
+                          color: wColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-      );
-    },
-    style: ElevatedButton.styleFrom(
-      // ignore: deprecated_member_use
-      foregroundColor: wColor, primary: pColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
       ),
-      minimumSize: Size(MediaQuery.of(context).size.width, 60),
-    ),
-    child: Text(
-      "Prenez un Rendez-vous",
-      style: TextStyle(
-        color: wColor,
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  ),
-),
-                                
-                              ],
-                            ),
-                          ),],),),
-                          );
-                          
-                        
-                      }
-                  
-              
-                
-       
-    
-
+    );
   }
-  
-
-                        
+}

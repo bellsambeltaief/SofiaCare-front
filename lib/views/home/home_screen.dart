@@ -3,8 +3,8 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 // ignore: unused_import
 import 'package:http/http.dart' as http;
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:sofiacare/patient/screens/doctors_section.dart';
-import 'colors.dart';
+import 'package:sofiacare/views/doctor/doctors_section.dart';
+import '../../tools/colors.dart';
  // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   static String routeName = "/home";

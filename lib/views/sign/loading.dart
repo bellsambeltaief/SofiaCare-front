@@ -1,10 +1,10 @@
 import 'package:sofiacare/constant.dart';
-import 'package:sofiacare/patient/screens/home_screen.dart';
-import 'package:sofiacare/welcome_animation/sign/login.dart';
+import 'package:sofiacare/views/home/home_screen.dart';
+import 'package:sofiacare/views/sign/login.dart';
 import 'package:sofiacare/model/api_response.dart';
 import 'package:flutter/material.dart';
 
-import '../../services/user_service.dart';
+import '../services/user_service.dart';
 
 class Loading extends StatefulWidget {
   const Loading({super.key});
