@@ -1,5 +1,10 @@
+<<<<<<< HEAD:lib/views/welcome_animation/components/welcome_page.dart
 import 'package:sofiacare/views/sign/login.dart';
 import 'package:sofiacare/views/sign/register.dart';
+=======
+import 'package:sofiacare/sign/login.dart';
+import 'package:sofiacare/sign/register.dart';
+>>>>>>> 4365e2e7383b743d884ca3d6d25ca7a4064b18f4:lib/welcome_animation/components/welcome_page.dart
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 

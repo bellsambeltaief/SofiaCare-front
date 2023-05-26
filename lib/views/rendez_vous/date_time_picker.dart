@@ -5,6 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:sofiacare/views/rendez_vous/validate.dart';
 import 'package:sofiacare/widgets/app_bar.dart';
 
+<<<<<<< HEAD:lib/views/rendez_vous/date_time_picker.dart
+=======
+import '../../../widgets/app_bar.dart';
+>>>>>>> 4365e2e7383b743d884ca3d6d25ca7a4064b18f4:lib/patient/screens/rendez_vous/date_time_picker.dart
 import '../../widgets/buttons/button_login.dart';
 
 class DateTimePicker extends StatefulWidget {

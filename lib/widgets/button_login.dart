@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+<<<<<<<< HEAD:lib/widgets/button_login.dart
 import '../../tools/colors_palette.dart';
+========
+import '../../../colors_palette.dart';
+>>>>>>>> 4365e2e7383b743d884ca3d6d25ca7a4064b18f4:lib/patient/widgets/buttons/button_login.dart
 
 class ButtonLogin extends StatelessWidget {
   const ButtonLogin({

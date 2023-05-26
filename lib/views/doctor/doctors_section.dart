@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD:lib/views/doctor/doctors_section.dart
 // ignore: unused_import
 import 'package:http/http.dart' as http;
 import 'package:sofiacare/tools/colors.dart';
@@ -7,6 +8,11 @@ import '../patient/appoint_screen.dart';
 
 // ignore: unused_import, duplicate_import
 import '../patient/appoint_screen.dart';
+=======
+import 'package:sofiacare/colors_palette.dart';
+import 'appoint_screen.dart';
+
+>>>>>>> 4365e2e7383b743d884ca3d6d25ca7a4064b18f4:lib/patient/screens/doctors_section.dart
 
 class DocTorsSection extends StatelessWidget {
   get index => null;
@@ -34,7 +40,7 @@ class DocTorsSection extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
-                      color: sdColor,
+                      color: ColorsPalette.sdColor,
                       blurRadius: 4,
                       spreadRadius: 2,
                     ),
@@ -75,7 +81,7 @@ class DocTorsSection extends StatelessWidget {
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
-                                  color: sdColor,
+                                  color: ColorsPalette.sdColor,
                                   blurRadius: 4,
                                   spreadRadius: 2,
                                 ),
@@ -84,7 +90,7 @@ class DocTorsSection extends StatelessWidget {
                             child: Center(
                               child: Icon(
                                 Icons.favorite_outline,
-                                color: pColor,
+                                color: ColorsPalette.pColor,
                                 size: 28,
                               ),
                             ),
@@ -101,13 +107,13 @@ class DocTorsSection extends StatelessWidget {
                       style:TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w500,
-                        color:pColor,
+                        color:ColorsPalette.pColor,
                       ),
                       ),
                       Text("chirurgien",
                       style:TextStyle(
                         fontSize: 18,
-                        color: bColor.withOpacity(0.6,),
+                        color: ColorsPalette.bColor.withOpacity(0.6,),
                       ),
                       ),
                       SizedBox(height: 8,),
@@ -119,7 +125,7 @@ class DocTorsSection extends StatelessWidget {
                         Text("4.9",
                         style: TextStyle(
                           fontSize: 16,
-                          color: bColor.withOpacity(0.6,),
+                          color: ColorsPalette.bColor.withOpacity(0.6,),
                         ),
                         ),
                       ],),
